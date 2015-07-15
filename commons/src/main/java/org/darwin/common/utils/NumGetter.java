@@ -2,7 +2,7 @@
  * org.darwin.common.utils.NumGetter.java
  * created by Tianxin(tianjige@163.com) on 2015年7月14日 下午3:26:29
  */
-package org.darwin.common;
+package org.darwin.common.utils;
 
 
 /**

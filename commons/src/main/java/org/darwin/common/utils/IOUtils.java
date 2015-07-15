@@ -2,7 +2,7 @@
  * org.darwin.common.utils.FileUtils.java
  * created by Tianxin(tianjige@163.com) on 2015年6月8日 下午5:32:42
  */
-package org.darwin.common;
+package org.darwin.common.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

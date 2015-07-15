@@ -2,7 +2,7 @@
  * org.darwin.common.utils.Utils.java
  * created by Tianxin(tianjige@163.com) on 2015年6月4日 下午1:25:52
  */
-package org.darwin.common;
+package org.darwin.common.utils;
 
 import java.io.Serializable;
 import java.util.ArrayList;

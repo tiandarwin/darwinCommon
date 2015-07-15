@@ -2,7 +2,7 @@
  * org.darwin.common.utils.ValueUtils.java
  * created by Tianxin(tianjige@163.com) on 2015年7月13日 下午12:46:03
  */
-package org.darwin.common;
+package org.darwin.common.utils;
 
 /**
  * 对象取值的方法集

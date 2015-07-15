@@ -2,7 +2,7 @@
  * org.darwin.common.utils.EntryGetter.java
  * created by Tianxin(tianjige@163.com) on 2015年7月1日 下午5:27:10
  */
-package org.darwin.common;
+package org.darwin.common.utils;
 
 /**
  * 获取一个map中的entry
