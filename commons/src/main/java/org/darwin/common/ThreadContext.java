@@ -31,7 +31,7 @@ public class ThreadContext {
    */
   public final static void clean() {
     CTX.get().clear();
-    CTX.set(null);
+    CTX.remove();
   }
 
   /**
