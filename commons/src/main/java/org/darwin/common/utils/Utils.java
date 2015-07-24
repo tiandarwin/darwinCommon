@@ -218,6 +218,29 @@ public class Utils {
   }
   
   /**
+   * 将F的列表转换为T的列表,如果为null，则不添加进to的列表中
+   * @param froms
+   * @param converter
+   * @return
+   * <br/>created by Tianxin on 2015年7月23日 下午2:19:25
+   */
+  public final static <F,T> List<T> trans2NewList(List<F> froms, Converter<F,T> converter){
+    if(froms == null || froms.size() == 0){
+      return new ArrayList<T>(0);
+    }
+    
+    List<T> tos = new ArrayList<T>(froms.size());
+    for(F f : froms){
+      if(f == null){
+        continue;
+      }
+      T to = converter.convert(f);
+      tos.add(to);
+    }
+    return tos;
+  }
+  
+  /**
    * 将实体列表转化为一个map，key为keyGetter获取到的key，value为实体本身
    * @param entities
    * @param keyGetter 从entity中获取放到hashMap里的key
