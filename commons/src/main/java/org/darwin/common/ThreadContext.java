@@ -30,19 +30,23 @@ public class ThreadContext {
    * created by Tianxin on 2015年6月8日 上午10:32:31
    */
   public final static void clean() {
-    CTX.get().clear();
     CTX.remove();
   }
 
   /**
    * 线程上下文的初始化。init方法必须和clean方法配合使用。在线程的最外层调用中，先init，然后在finally中clean。
+   * <b>如果之前已经初始化过，则返回false，否则证明在这里初始化成功。</b>
    * 
    * created by Tianxin on 2015年6月8日 上午10:33:31
    */
-  public final static void init() {
+  public final static boolean init() {
+    if(CTX.get() != null){
+      return false;
+    }
+    
     Map<String, Object> currentThreadCtx = new HashMap<String, Object>(16);
     CTX.set(currentThreadCtx);
-
+    return true;
   }
 
   /**
