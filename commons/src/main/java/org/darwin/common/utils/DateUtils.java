@@ -4,6 +4,7 @@
  */
 package org.darwin.common.utils;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,6 +19,17 @@ public class DateUtils {
   private final static long millisOneMinute = 1000 * 60;
   private final static long millisOneHour = millisOneMinute * 60;
   private final static long millisOneDay = millisOneHour * 24;
+  
+  /**
+   * 以"yyyy-MM-dd HH:mm:ss" 格式来显示一个时间字段
+   * @param date
+   * @return
+   * <br/>created by Tianxin on 2015年8月6日 下午5:41:11
+   */
+  public final static String format(Date date){
+    DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    return fmt.format(date);
+  }
   
   /**
    * 获取当前的小时戳

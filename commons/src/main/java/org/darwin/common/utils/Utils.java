@@ -85,6 +85,16 @@ public class Utils {
   public final static boolean isEmpty(Collection<?> cs) {
     return cs == null || cs.isEmpty();
   }
+  
+  /**
+   * 判断一个集合是否为空
+   * @param map
+   * @return
+   * created by Tianxin on 2015年6月4日 下午1:34:00
+   */
+  public final static boolean isEmpty(Map<?, ?> map) {
+    return map == null || map.isEmpty();
+  }
 
   /**
    * 判断一个字符串是否为空
@@ -176,6 +186,27 @@ public class Utils {
     Map<K,V> map = newMap(entities.size());
     for(ENTITY entity : entities){
       map.put(entryGetter.getKey(entity), entryGetter.getValue(entity));
+    }
+    return map;
+  }
+  
+  /**
+   * 将entities中的每个对象提取出相应的key与value组成一个map,如果有key的重复，将按照entryMerger指定的规则来使用相应的value
+   * @param entities
+   * @param entryMerger
+   * @return
+   * <br/>created by Tianxin on 2015年7月1日 下午5:46:26
+   */
+  public final static <K,V,ENTITY> Map<K, V> extract2Map(Collection<ENTITY> entities, EntryMerger<ENTITY,K,V> entryMerger){
+    if(isEmpty(entities)){
+      return newMap(0);
+    }
+    Map<K,V> map = newMap(entities.size());
+    for(ENTITY entity : entities){
+      K key = entryMerger.getKey(entity);
+      V oldValue = map.get(key);
+      V value = entryMerger.getValue(entity, oldValue);
+      map.put(key, value);
     }
     return map;
   }
