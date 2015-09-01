@@ -7,6 +7,7 @@ package org.darwin.common.utils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -246,6 +247,62 @@ public class Utils {
       }
     }
     return map;
+  }
+  
+  /**
+   * 将list先按照FilterSort的accept方法进行过滤，之后再按照sort方法进行排序，最后截取startIndex到endIndex之间的数据
+   * @param fromIndex  从0开始，startIndex为第一个元素
+   * @param toIndex    endIndex不包含在内
+   * @param list
+   * @param fs
+   * @return
+   * <br/>created by Tianxin on 2015年9月1日 下午12:25:05
+   */
+  public final static <E> List<E> filterAndSublist(int fromIndex, int toIndex, List<E> list, FilterSort<E> fs){
+    
+    //容错判断
+    if(toIndex <= fromIndex){
+      throw new RuntimeException(connect("startIndex [", fromIndex, "] 大于 endIndex [", toIndex, "]" ));
+    }
+    
+    //容错
+    if(isEmpty(list)){
+      return new ArrayList<E>(0);
+    }
+    
+    //过滤
+    List<E> newList = new ArrayList<E>(list.size());
+    for(E e : list){
+      if(fs.accept(e)){
+        newList.add(e);
+      }
+    }
+    
+    //如果size有问题，则直接返回空列表
+    int newSize = newList.size();
+    if(fromIndex >= newSize){
+      return new ArrayList<E>(0);
+    }
+    
+    //排序
+    Collections.sort(newList, fs);
+    int maxToIndex = newList.size();
+    return newList.subList(fromIndex, maxToIndex < toIndex ? maxToIndex : toIndex);
+  }
+  
+  /**
+   * 将list先排序，然后分页取到第pageNo页
+   * @param pageNo
+   * @param pageSize
+   * @param list
+   * @param fs  过滤与排序的工具对象
+   * @return
+   * <br/>created by Tianxin on 2015年9月1日 下午12:35:28
+   */
+  public final static <E> List<E> pageAndFilter(int pageNo, int pageSize, List<E> list, FilterSort<E> fs){
+    int fromIndex = pageSize * (pageNo - 1);
+    int toIndex = fromIndex + pageSize;
+    return filterAndSublist(fromIndex, toIndex, list, fs);
   }
   
   /**
@@ -573,5 +630,4 @@ public class Utils {
     }
     return param;
   }
-  
 }
