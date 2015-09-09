@@ -57,8 +57,7 @@ public class DateUtils {
    * created by Tianxin on 2015年6月4日 下午4:30:04
    */
   public final static int getYesterdayInt() {
-    Date date = new Date(System.currentTimeMillis() - millisOneDay);
-    return getDateInt(date);
+    return getDateInt(-1);
   }
 
   /**
@@ -210,5 +209,40 @@ public class DateUtils {
     }
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     return format.format(date);
+  }
+  
+  /**
+   * 获取date的deltaDays之后的天时间戳
+   * @param date
+   * @param deltaDays
+   * @return
+   * <br/>created by Tianxin on 2015年9月9日 下午12:02:50
+   */
+  public static int getDateInt(int date, int deltaDays){
+    Date oDate = getDateFromInt(date);
+    return getDateInt(oDate, deltaDays);
+  }
+  
+  /**
+   * 获取date的deltaDays之后的天时间戳
+   * @param date
+   * @param deltaDays
+   * @return
+   * <br/>created by Tianxin on 2015年9月9日 下午12:02:50
+   */
+  public static int getDateInt(Date date, int deltaDays){
+    Date oDate = new Date(System.currentTimeMillis() + millisOneDay * deltaDays);
+    return getDateInt(oDate);
+  }
+  
+  /**
+   * 获取今天之后deltaDays的天时间戳
+   * @param deltaDays
+   * @return
+   * <br/>created by Tianxin on 2015年9月9日 下午12:03:52
+   */
+  public static int getDateInt(int deltaDays){
+    Date date = new Date();
+    return getDateInt(date, deltaDays);
   }
 }
