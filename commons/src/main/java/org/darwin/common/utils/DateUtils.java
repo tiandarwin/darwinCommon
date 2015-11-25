@@ -245,4 +245,22 @@ public class DateUtils {
     Date date = new Date();
     return getDateInt(date, deltaDays);
   }
+
+  /**
+   * 获取long型的时间字段值。格式为yyyyMMddHHmmss
+   * @return
+   * <br/>created by Tianxin on 2015年9月15日 下午5:37:19
+   */
+  public static long getTimeLong() {
+    Date date = new Date();
+    SimpleDateFormat formater = new SimpleDateFormat("yyyyMMddHHmmss");
+    String sDate = formater.format(date);
+    return Long.parseLong(sDate);
+  }
+  
+  public static void main(String[] args) {
+    Calendar c = new GregorianCalendar();
+    c.setTime(new Date());
+    System.out.println(c.toString());
+  }
 }
