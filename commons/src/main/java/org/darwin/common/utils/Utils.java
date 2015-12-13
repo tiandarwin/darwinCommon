@@ -180,6 +180,34 @@ public class Utils {
    * @return
    * <br/>created by Tianxin on 2015年7月1日 下午5:46:26
    */
+  public final static <K,V,ENTITY> Map<K, Set<V>> extract2KeySetMap(Collection<ENTITY> entities, EntryGetter<ENTITY,K,V> entryGetter){
+    if(isEmpty(entities)){
+      return newMap(0);
+    }
+    Map<K, Set<V>> map = newMap(entities.size());
+    for (ENTITY entity : entities) {
+      if (entity != null) {
+        
+        K key = entryGetter.getKey(entity);
+        V value = entryGetter.getValue(entity);
+        Set<V> list = map.get(key);
+        if(list == null){
+          list = new HashSet<V>();
+          map.put(key, list);
+        }
+        list.add(value);
+      }
+    }
+    return map;
+  }
+  
+  /**
+   * 将entities中的每个对象提取出相应的key与value组成一个map
+   * @param entities
+   * @param entryGetter
+   * @return
+   * <br/>created by Tianxin on 2015年7月1日 下午5:46:26
+   */
   public final static <K,V,ENTITY> Map<K, V> extract2Map(Collection<ENTITY> entities, EntryGetter<ENTITY,K,V> entryGetter){
     if(isEmpty(entities)){
       return newMap(0);
